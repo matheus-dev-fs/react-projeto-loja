@@ -27,15 +27,15 @@ export function ThemeToggle() {
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setTheme("light")}>
                     <SunIcon />
-                    Light
+                    Claro
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")}>
                     <Moon />
-                    Dark
+                    Escuro
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("system")}>
                     <LaptopIcon />
-                    System
+                    Sistema
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
