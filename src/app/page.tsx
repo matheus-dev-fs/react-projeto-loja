@@ -1,13 +1,15 @@
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
 import { JSX } from "react";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
 
 const Page = (): JSX.Element => {
     return (
-        <div>
-            <Button>Clique aqui</Button>
-
-            <ThemeToggle />
+        <div className="w-full max-w-4xl mx-auto">
+            <Header />
+            <div className="mx-3">
+                ...
+            </div>
+            <Footer />
         </div>
     );
 }
