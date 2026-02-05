@@ -1,6 +1,7 @@
 import { JSX } from "react"
 import { Logo } from "@/components/logo"
-import { ThemeToggle } from "./theme-toggle"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { CartSidebar } from "@/components/cart/sidebar"
 
 export const Header = (): JSX.Element => {
     return (
@@ -10,7 +11,7 @@ export const Header = (): JSX.Element => {
                 <ThemeToggle />
             </div>
             <div className="flex items-center gap-3">
-                ...
+                <CartSidebar />
             </div>
         </header>
     )
