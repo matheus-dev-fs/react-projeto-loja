@@ -3,6 +3,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getAllProducts } from "@/services/product";
 import { Product } from "@/types/product";
 import { Tab } from "@/types/tab";
+import { ProductEmpty } from "./empty";
+import { ProductItem } from "./item";
 
 export const ProductsTab = async (): Promise<JSX.Element> => {
     const products: Product[] = await getAllProducts();
@@ -11,22 +13,22 @@ export const ProductsTab = async (): Promise<JSX.Element> => {
         {
             title: 'Sushi',
             value: 'sushi',
-            products: []
+            products: products.filter((product: Product): boolean => product.category === 'sushi')
         },
         {
             title: 'Temaki',
             value: 'temaki',
-            products: []
+            products: products.filter((product: Product): boolean => product.category === 'temaki')
         },
         {
             title: 'Combinados',
             value: 'pack',
-            products: []
+            products: products.filter((product: Product): boolean => product.category === 'pack')
         },
         {
             title: 'Bebidas',
             value: 'beverage',
-            products: []
+            products: products.filter((product: Product): boolean => product.category === 'beverage')
         }
     ];
 
@@ -49,7 +51,17 @@ export const ProductsTab = async (): Promise<JSX.Element> => {
                     value={tab.value}
                     className="mt-6"
                 >
-                    ...
+                    {tab.products.length > 0 && 
+                        <div className="grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+                            {tab.products.map((product: Product): JSX.Element => (
+                                <ProductItem item={product} key={product.id} />
+                            ))}
+                        </div>
+                    }
+
+                    {tab.products.length === 0 && 
+                        <ProductEmpty />
+                    }
                 </TabsContent>
             ))}
         </Tabs>
