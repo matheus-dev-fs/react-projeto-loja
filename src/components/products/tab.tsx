@@ -1,7 +1,11 @@
 import { JSX } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getAllProducts } from "@/services/product";
+import { Product } from "@/types/product";
 
-export const ProductsTab = (): JSX.Element => {
+export const ProductsTab = async (): Promise<JSX.Element> => {
+    const products: Product[] = await getAllProducts();
+
     return (
         <Tabs defaultValue="tab1">
             <TabsList className="flex w-full">
