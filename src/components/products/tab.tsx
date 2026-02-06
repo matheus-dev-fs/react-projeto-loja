@@ -2,28 +2,56 @@ import { JSX } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getAllProducts } from "@/services/product";
 import { Product } from "@/types/product";
+import { Tab } from "@/types/tab";
 
 export const ProductsTab = async (): Promise<JSX.Element> => {
     const products: Product[] = await getAllProducts();
 
+    const tabs: Tab[] = [
+        {
+            title: 'Sushi',
+            value: 'sushi',
+            products: []
+        },
+        {
+            title: 'Temaki',
+            value: 'temaki',
+            products: []
+        },
+        {
+            title: 'Combinados',
+            value: 'pack',
+            products: []
+        },
+        {
+            title: 'Bebidas',
+            value: 'beverage',
+            products: []
+        }
+    ];
+
     return (
-        <Tabs defaultValue="tab1">
+        <Tabs defaultValue="sushi">
             <TabsList className="flex w-full">
-                <TabsTrigger 
-                    value="tab1"
-                    className="flex-1"
-                >Tab 1</TabsTrigger>
-                <TabsTrigger 
-                    value="tab2"
-                    className="flex-1"
-                >Tab 2</TabsTrigger>
+                {tabs.map((tab: Tab): JSX.Element => (
+                    <TabsTrigger 
+                        key={tab.value}
+                        value={tab.value}
+                        className="flex-1"
+                    >
+                        {tab.title}
+                    </TabsTrigger>
+                ))}
             </TabsList>
-            <TabsContent value="tab1" className="mt-6">
-                Conteudo da aba 1
-            </TabsContent>
-            <TabsContent value="tab2" className="mt-6">
-                Conteudo da aba 2
-            </TabsContent>
+            {tabs.map((tab: Tab): JSX.Element => (
+                <TabsContent
+                    key={tab.value}
+                    value={tab.value}
+                    className="mt-6"
+                >
+                    ...
+                </TabsContent>
+            ))}
         </Tabs>
     );
 }
