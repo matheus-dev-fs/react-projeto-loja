@@ -16,7 +16,7 @@ export const useCartStore = create<States & Actions>()(
             quantity: number
         ): void =>
             set((state: States & Actions): States & Actions => {
-                let newCart: Cart[] = state.cart;
+                let newCart: Cart[] = [...state.cart];
 
                 let productIndex = newCart.findIndex(
                     (cartItem: Cart): boolean =>
