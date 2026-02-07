@@ -1,5 +1,6 @@
 import { Cart } from "@/types/cart-store-states/cart";
 import { JSX } from "react";
+import { CartItemQuantity } from "./item-quantity";
 
 type Props = {
     item: Cart;
@@ -7,8 +8,17 @@ type Props = {
 
 export const CartItem = ({ item }: Props): JSX.Element => {
     return (
-        <div>
-            ...
+        <div className="flex items-center gap-3">
+            <div className="w-16 overflow-hidden">
+                <img src={item.product.image} className="w-full h-auto object-cover"/>
+            </div>
+            <div className="flex-1">
+                <p className="text-md">{item.product.name}</p>
+                <p className="text-xs opacity-50">R$ {item.product.price.toFixed(2)}</p>
+            </div>
+            <div>
+                <CartItemQuantity cartItem={item} />
+            </div>
         </div>
     );
 }
