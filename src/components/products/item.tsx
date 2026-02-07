@@ -4,13 +4,20 @@ import { Product } from "@/types/product";
 import { JSX } from "react";
 import { Button } from "@/components/ui/button";
 import { toast} from "sonner";
+import { useCartStore } from "@/stores/cart-store";
+import { Actions } from "@/types/cart-store-states/actions";
+import { States } from "@/types/cart-store-states/states";
 
 type Props = {
     item: Product;
 }
 
 export const ProductItem = ({ item }: Props): JSX.Element => {
+    const { upsertCartItem } = useCartStore((state: States & Actions): States & Actions => state);
+
     const handleAddButton = (): void => {
+        upsertCartItem(item, 1);
+
         toast.success(`Produto adicionado ao carrinho!`, {
             description: item.name,
             action: {
