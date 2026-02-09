@@ -1,8 +1,8 @@
-import { JSX } from "react";
+import { Dispatch, JSX, SetStateAction } from "react";
 import { Steps } from "@/types/steps";
 
 type Props = {
-    setStep: (step: Steps) => void;
+    setStep: Dispatch<SetStateAction<Steps>>;
 }
 
 export const StepAddress = ({ setStep }: Props): JSX.Element => {
