@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX } from "react";
+import { Dispatch, JSX, SetStateAction, useState } from "react";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
@@ -9,9 +9,11 @@ import { useCartStore } from "@/stores/cart-store";
 import { States } from "@/types/cart-store-states/states";
 import { Actions } from "@/types/cart-store-states/actions";
 import { Cart } from "@/types/cart-store-states/cart";
-import { CartItem } from "./item";
+import { CartItem } from "@/components/cart/item";
+import { CheckoutDialog } from "@/components/checkout/dialog";
 
 export const CartSidebar = (): JSX.Element => {
+    const [checkoutOpen, setCheckoutOpen]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
     const { cart } = useCartStore((state: States & Actions): States & Actions => state);
 
     const subTotal: number = cart.reduce(
@@ -19,6 +21,10 @@ export const CartSidebar = (): JSX.Element => {
             accumulator + cartItem.product.price * cartItem.quantity,
         0
     );
+
+    const handleCheckoutOpen = (): void => {
+        setCheckoutOpen(true);
+    }
 
     return (
         <Sheet>
@@ -59,8 +65,14 @@ export const CartSidebar = (): JSX.Element => {
                 <div className="text-center">
                     <Button
                         disabled={cart.length === 0}
+                        onClick={handleCheckoutOpen}
                     >Finalizar compra</Button>
                 </div>
+
+                <CheckoutDialog 
+                    open={checkoutOpen}
+                    onOpenChange={setCheckoutOpen}
+                />
             </SheetContent>
         </Sheet>
     );
