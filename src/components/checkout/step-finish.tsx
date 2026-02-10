@@ -4,13 +4,14 @@ import { States } from "@/types/checkout-store-states/states";
 import { JSX } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { generateMessage } from "@/lib/generate-message";
 
 export const StepFinish = (): JSX.Element => {
     const { name }: {
         name: string;
     } = useCheckoutStore((state: States & Actions): States & Actions => state);
 
-    const message: string = 'Olá, tudo bem?';
+    const message: string = generateMessage();
     const linkWhatsapp: string = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${encodeURI(message)}`;
 
     return (
